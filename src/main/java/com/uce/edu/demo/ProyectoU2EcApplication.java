@@ -1,6 +1,5 @@
 package com.uce.edu.demo;
 
-import org.apache.commons.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,15 +7,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.service.IPersonaJdbcService;
-import com.uce.edu.demo.to.Persona;
+import com.uce.edu.demo.estudiante.service.IEstudianteJdbcService;
+import com.uce.edu.demo.estudiante.to.Estudiante;
 
 @SpringBootApplication
 public class ProyectoU2EcApplication implements CommandLineRunner{
 	
 	private static final Logger LOG= LoggerFactory.getLogger(ProyectoU2EcApplication.class);
 	@Autowired
-	private IPersonaJdbcService iPersonaJdbcService;
+	private IEstudianteJdbcService iEstudianteJdbcService;
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2EcApplication.class, args);
 	}
@@ -24,27 +23,33 @@ public class ProyectoU2EcApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-	
-		Persona persona = new Persona();
-		persona.setId(4);
-		persona.setNombre("Juan");
-		persona.setApellido("Jimenez");
 		
+		
+		Estudiante e = new Estudiante();
+		e.setId(4);
+		e.setNombre("Maria");
+		e.setApellido("Delgado");
+		e.setEdad("40");
+		e.setGenero("F");
 		//Insertar
-		//this.iPersonaJdbcService.guardar(persona);
-		Persona per1 = new Persona();
-		per1.setId(1);
-		per1.setNombre("A");
-		per1.setApellido("B");
-		
+		this.iEstudianteJdbcService.guardar(e);
+		LOG.info("Se guardo:"+e);
+		Estudiante e1 = new Estudiante();
+		e1.setId(4);
+		e1.setNombre("Evelyn");
+		e1.setApellido("Jimenez");
+		e1.setEdad("36");
+		e1.setGenero("F");
 		//Actualizar
-		//this.iPersonaJdbcService.actualizar(per1);
-		
+		this.iEstudianteJdbcService.actualizar(e1);
+		LOG.info("Se Actualizo:"+e1);
 		//Eliminar
-		//this.iPersonaJdbcService.eliminar(2);
+		this.iEstudianteJdbcService.eliminar(3);
+	
 		
-        //Buscar
-	    LOG.info(this.iPersonaJdbcService.buscar(3).toString());
+		//Buscar
+		LOG.info(this.iEstudianteJdbcService.buscar(4).toString());
+	
 	}
 
 }
