@@ -1,36 +1,38 @@
-package com.uce.edu.demo.estudiante.to;
+package com.uce.edu.demo.estudiante.modelo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="estudiante")
 public class Estudiante {
-	
-	private int id;
+	@Id
+	@Column(name= "id")
+	private Integer id;
+	@Column(name= "nombre")
 	private String nombre;
+	@Column(name= "apellido")
 	private String apellido;
+	@Column(name= "edad")
 	private String edad;
+	@Column(name= "genero")
 	private String genero;
 	
-	public Estudiante() {
-		
-	}
 	
-	public Estudiante(int id, String nombre, String apellido, String edad, String genero) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.edad = edad;
-		this.genero = genero;
-	}
+	
 	@Override
 	public String toString() {
 		return "Estudiante [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", genero="
 				+ genero + "]";
 	}
-	
 	//GET Y SET
-	public int getId() {
+
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getNombre() {
@@ -58,6 +60,5 @@ public class Estudiante {
 		this.genero = genero;
 	}
 	
-
 	
 }

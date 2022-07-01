@@ -7,21 +7,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.estudiante.service.IEstudianteJdbcService;
-import com.uce.edu.demo.estudiante.to.Estudiante;
-import com.uce.edu.demo.repository.modelo.Persona;
-import com.uce.edu.demo.service.IPersonaJdbcService;
-import com.uce.edu.demo.service.IPersonaJpaService;
+import com.uce.edu.demo.estudiante.modelo.Estudiante;
+import com.uce.edu.demo.estudiante.service.IEstudianteJpaService;
 
 @SpringBootApplication
 public class ProyectoU2EcApplication implements CommandLineRunner{
 	
 	private static final Logger LOG= LoggerFactory.getLogger(ProyectoU2EcApplication.class);
-	@Autowired
-	private IPersonaJdbcService iPersonaJdbcService;
 	
 	@Autowired
-	private IPersonaJpaService iPersonaJpaService;
+	private IEstudianteJpaService iEstudianteJpaService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2EcApplication.class, args);
@@ -30,21 +25,29 @@ public class ProyectoU2EcApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		LOG.info("Datos con JPA: "+this.iPersonaJpaService.buscarPorId(3));
-	    Persona p = new Persona();
-	    p.setId(7);
-	    p.setNombre("Jose");
-	    p.setApellido("Cayambe");
-	    //Guardar
-		//this.iPersonaJpaService.guardar(p);
-	    Persona p1 = new Persona();
-	    p.setId(4);
-	    p.setNombre("Andrea");
-	    p.setApellido("Solis");
-	    //Actualizacion
-		//this.iPersonaJpaService.actualizar(p);
+		
+		LOG.info("Datos con JPA: "+this.iEstudianteJpaService.buscarPorId(4));
+		
+		Estudiante e= new Estudiante();
+		e.setId(2);
+		e.setNombre("Juan");
+		e.setApellido("Valasquez");
+		e.setEdad("26");
+		e.setGenero("M");
+		//Guardar
+		this.iEstudianteJpaService.guardar(e);
+		Estudiante e1= new Estudiante();
+		e1.setId(1);
+		e1.setNombre("Juan");
+		e1.setApellido("Jimenez");
+		e1.setEdad("25");
+		e1.setGenero("M");
+		//Actualizacion
+	    this.iEstudianteJpaService.actualizar(e);
 	    
-		this.iPersonaJpaService.eliminar(3);
+	    //Eliminar
+	    this.iEstudianteJpaService.eliminar(4);
+	
 	}
 
 }
