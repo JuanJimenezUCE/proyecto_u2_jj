@@ -60,6 +60,20 @@ public class ProyectoU2EcApplication implements CommandLineRunner{
 	    	
 	    	LOG.info("Persona : "+item);
 	    }
+	    
+	    List<Persona> listaPersona1 =this.iPersonaJpaService.buscarPorGenero("M");
+	    
+	    for(Persona item :listaPersona1) {
+	    	
+	    	LOG.info("Persona : "+item);
+	    }
+	    
+	    List<Persona> listaPersona2 =this.iPersonaJpaService.buscarPorNombre("Pepito");
+	    
+	    for(Persona item :listaPersona2) {
+	    	
+	    	LOG.info("Persona : "+item);
+	    }
 	}
 
 }
