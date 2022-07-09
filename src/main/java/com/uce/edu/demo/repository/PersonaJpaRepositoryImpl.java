@@ -20,6 +20,7 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository{
 	@Override
 	public Persona buscarPorId(Integer id) {
 		// TODO Auto-generated method stub
+		//black friday se inserta
 		return this.entityManager.find(Persona.class, id);
 	}
 
@@ -77,6 +78,27 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository{
 		myQuery.setParameter("datoNombre", nombre);
 		
 		return myQuery.getResultList();
+	}
+
+	@Override
+	public int actualizarPorApellido(String genero,String apellido) {
+		// update persona set pers_genero='H' where pers_apellido='Cayambe'
+		Query myQuery=this.entityManager.createQuery("UPDATE Persona p SET p.genero= :datoGenero  WHERE p.apellido= :datoApellido");
+		myQuery.setParameter("datoGenero", genero);
+		myQuery.setParameter("datoApellido", apellido);
+		return myQuery.executeUpdate();
+		
+	
+	}
+
+	@Override
+	public int eliminarPorGenero(String genero) {
+		// TODO Auto-generated method stub
+		//	delete from persona where pers_apellido='Cayambe'
+		Query myQuery=this.entityManager.createQuery("DELETE FROM Persona p WHERE p.genero= :genero ");
+		myQuery.setParameter("genero", genero);
+		return myQuery.executeUpdate();
+	
 	}
 
 	
