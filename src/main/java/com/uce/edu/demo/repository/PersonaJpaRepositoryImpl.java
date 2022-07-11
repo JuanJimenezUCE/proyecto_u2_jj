@@ -95,7 +95,7 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository{
 	public int eliminarPorGenero(String genero) {
 		// TODO Auto-generated method stub
 		//	delete from persona where pers_apellido='Cayambe'
-		Query myQuery=this.entityManager.createQuery("DELETE FROM Persona p WHERE p.genero= :genero ");
+		Query myQuery=this.entityManager.createQuery("DELETE FROM Persona p WHERE p.genero= :genero  ");
 		myQuery.setParameter("genero", genero);
 		return myQuery.executeUpdate();
 	
