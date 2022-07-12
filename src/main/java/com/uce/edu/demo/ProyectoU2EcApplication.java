@@ -1,7 +1,6 @@
 package com.uce.edu.demo;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,11 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.prueba.modelo.Propietario;
-import com.uce.edu.demo.prueba.modelo.Vehiculo;
-import com.uce.edu.demo.prueba.service.IFachadaMatriculaService;
-import com.uce.edu.demo.prueba.service.IPropietarioService;
-import com.uce.edu.demo.prueba.service.IVehiculoService;
+import com.uce.edu.demo.repository.modelo.Persona;
+import com.uce.edu.demo.service.IPersonaJpaService;
 
 @SpringBootApplication
 public class ProyectoU2EcApplication implements CommandLineRunner{
@@ -22,11 +18,8 @@ public class ProyectoU2EcApplication implements CommandLineRunner{
 	private static final Logger LOG= LoggerFactory.getLogger(ProyectoU2EcApplication.class);
 
 	@Autowired
-	private IFachadaMatriculaService iFachadaMatriculaService;
-	@Autowired
-	private IVehiculoService vehiculo;
-	@Autowired
-	private IPropietarioService propietario;
+	private IPersonaJpaService iPersonaJpaService;
+
 	//private IPersonaJpaService iPersonaJpaService;
 
 	public static void main(String[] args) {
@@ -36,26 +29,33 @@ public class ProyectoU2EcApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-	
-		Propietario p = new Propietario();
-		p.setNombre("Juan");
-		p.setApellido("Jimenez");
-		p.setCedula("1723026900");
-		p.setFecha(LocalDateTime.now());
-		
-		this.propietario.ingresar(p);
-		
-		LOG.info("se ingreso el propietario: " + p);
-		
-		Vehiculo v =new Vehiculo();
-		v.setMarca("KIA");
-		v.setTipo("L");
-		v.setPlaca("PDM1485");
-		v.setPrecio(new BigDecimal(30000));
-		
-		this.vehiculo.ingresar(v);
-		
-		LOG.info("se ingreso el vehiculo: " + v);
+
+		Persona p = new Persona();
+	 
+	    p.setNombre("Daniel");
+	    p.setApellido("Velez");
+	    p.setGenero("M");
+	    p.setCedula("1785965842");
+	    //Guardar
+		//this.iPersonaJpaService.guardar(p);
+
+	    //1 TypedQuery
+	    Persona perTyped =this.iPersonaJpaService.buscarPorCedulaTyped("175685256");
+	    LOG.info("Persona Typed: "+perTyped);
+	    //2 NamedQuery
+	    Persona perNamed =this.iPersonaJpaService.buscarPorCedulaNamed("175685256");
+	    LOG.info("Persona Named: "+perNamed);
+	    //3 TypedQuery y NamedQuery
+	    Persona perTypedNamed =this.iPersonaJpaService.buscarPorCedulaTypedNamed("175685256");
+	    LOG.info("Persona TypedNamed: "+perTypedNamed);
+	    //4 Varios namedQuery
+	    
+	    List<Persona>listaPersona=this.iPersonaJpaService.buscarPorNombreApellido("Daniel", "Velez");
+	    for(Persona item: listaPersona) {
+		    LOG.info("Persona : "+item);
+	    }
+	    
+	    
 	}
 
 }

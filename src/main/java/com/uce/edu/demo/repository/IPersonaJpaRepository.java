@@ -8,8 +8,17 @@ public interface IPersonaJpaRepository {
 
 	public List<Persona> buscarPorGenero(String genero);
 	public List<Persona> buscarPorApellido(String apellido);
+	
+	public List<Persona> buscarPorNombreApellido(String nombre,String apellido);
+	
 	public List<Persona> buscarPorNombre(String nombre);
 	public Persona buscarPorCedula(String cedula);
+	
+	public Persona buscarPorCedulaTyped(String cedula);
+	
+	public Persona buscarPorCedulaNamed(String cedula);
+	
+	public Persona buscarPorCedulaTypedNamed(String cedula);
 	public Persona buscarPorId(Integer id);
 	public void insertar(Persona persona);
 	public void actualizar(Persona persona);
@@ -17,5 +26,6 @@ public interface IPersonaJpaRepository {
 	
 	public int actualizarPorApellido(String genero,String apellido);
 	public int eliminarPorGenero(String genero);
+	
 	
 }
