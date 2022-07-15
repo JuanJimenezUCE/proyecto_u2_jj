@@ -21,7 +21,7 @@ import javax.persistence.Table;
   )
  
   @NamedNativeQuery(name="Persona.buscarPorCedulaNative",query="SELECT * FROM persona WHERE pers_cedula = :datoCedula",resultClass =Persona.class)
-  @NamedNativeQuery(name="Persona.buscarPorCedulaNativeApellido",query="SELECT * FROM persona WHERE pers_cedula = :datoCedula",resultClass =Persona.class)
+
 /*@NamedQueries({
 		@NamedQuery(name = "Persona.buscarPorCedula", query = "SELECT p FROM Persona p WHERE p.cedula = :datoCedula"),
 		@NamedQuery(name = "Persona.buscarPorNombreApellido", query = "SELECT p FROM Persona p WHERE p.nombre = :datoNombre AND p.apellido= :datoApellido") })

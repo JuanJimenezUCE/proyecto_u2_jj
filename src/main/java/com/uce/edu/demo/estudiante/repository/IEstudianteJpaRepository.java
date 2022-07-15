@@ -21,4 +21,12 @@ public interface IEstudianteJpaRepository {
 	
 	public List<Estudiante> buscarPorNombreApellido(String nombre, String apellido);
 	public List<Estudiante> buscarPorApellidoGenero(String apellido, String genero);
+	
+	//NativeQuery
+	public List<Estudiante> buscarPoredadGeneroNative(String edad, String genero);
+	public List<Estudiante> buscarPorApellidoEdadNative(String apellido, String edad);
+	//NamedNativeQuery
+	public List<Estudiante> buscarPorEdadNamedNative(String edad);
+	public List<Estudiante> buscarPorApellidoNamedNative(String apellido);
+	
 }
