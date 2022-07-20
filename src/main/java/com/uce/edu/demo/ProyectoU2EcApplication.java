@@ -1,5 +1,6 @@
 package com.uce.edu.demo;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,9 +13,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.uce.edu.demo.estudiante.modelo.EstudianteContadorEdad;
 import com.uce.edu.demo.estudiante.modelo.EstudianteSencillo;
 import com.uce.edu.demo.estudiante.service.IEstudianteJpaService;
+import com.uce.edu.demo.repository.modelo.Ciudadano;
+import com.uce.edu.demo.repository.modelo.Empleado;
 import com.uce.edu.demo.repository.modelo.Persona;
 import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
 import com.uce.edu.demo.repository.modelo.PersonaSencilla;
+import com.uce.edu.demo.service.ICiudadanoService;
 import com.uce.edu.demo.service.IPersonaJpaService;
 
 @SpringBootApplication
@@ -22,11 +26,10 @@ public class ProyectoU2EcApplication implements CommandLineRunner {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ProyectoU2EcApplication.class);
 
-	//@Autowired
-	//private IPersonaJpaService iPersonaJpaService;
-
 	@Autowired
-	private IEstudianteJpaService iEstudianteJpaService;
+	private ICiudadanoService iCiudadanoService;
+
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2EcApplication.class, args);
@@ -35,19 +38,28 @@ public class ProyectoU2EcApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
+		Ciudadano ciud1= new Ciudadano();
+		ciud1.setApellido("David");
+		ciud1.setNombre("Masabanda");
 		
+		Empleado empl1 = new Empleado();
+		empl1.setCodigoIess("45656");
+		empl1.setSalario(new BigDecimal(50));
+		empl1.setCiudadano(ciud1);
+				
+		ciud1.setEmpleado(empl1);
+		this.iCiudadanoService.insertar(ciud1);
 		
-		List<EstudianteSencillo> listaEstudiante=this.iEstudianteJpaService.buscarPorNombreSencillo("Juan");
+		Ciudadano ciud2= new Ciudadano();
+		ciud2.setApellido("David2");
+		ciud2.setNombre("Masabanda2");
 		
-		for (EstudianteSencillo estItem : listaEstudiante) {
-			LOG.info("EstudianteSencillo : " + estItem);
-		}
+		Empleado empl2 = new Empleado();
+		empl2.setCodigoIess("456562");
+		empl2.setSalario(new BigDecimal(502));
+		empl2.setCiudadano(ciud2);
 		
-		List<EstudianteContadorEdad> miListaEstudianteEdad=this.iEstudianteJpaService.consultarCantidadPorEdad("M");
-		
-		for (EstudianteContadorEdad estItem : miListaEstudianteEdad) {
-			LOG.info("EStudiante Edad : " + estItem);
-		}
+		//this.iCiudadanoService.insertar(empl2);
 	
 	}
 
