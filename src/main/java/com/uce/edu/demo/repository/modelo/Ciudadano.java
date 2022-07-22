@@ -1,5 +1,7 @@
 package com.uce.edu.demo.repository.modelo;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,21 +28,36 @@ public class Ciudadano {
 	@Column(name="ciud_apellido")
 	private String apellido;
 	
+	@Column(name="ciud_cedula")
+	private String cedula;
+	
+	@Column(name="ciud_fecha")
+	private LocalDateTime fecha;
+	
 	@OneToOne(mappedBy = "ciudadano",cascade = CascadeType.ALL)
-	private Empleado empleado;
+	private Pasaporte pasaporte;
 
 	
+	
+	//@OneToOne(mappedBy = "ciudadano",cascade = CascadeType.ALL)
+	//private Empleado empleado;
+
 	
 	@Override
 	public String toString() {
-		return "Ciudadano [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", empleado=" + empleado + "]";
+		return "Ciudadano [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
+				+ ", fecha=" + fecha + ", pasaporte=" + pasaporte + "]";
 	}
 
+	
+
 	//GET Y SET
+	
 	public Integer getId() {
 		return id;
 	}
 
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -61,18 +78,29 @@ public class Ciudadano {
 		this.apellido = apellido;
 	}
 
-	public Empleado getEmpleado() {
-		return empleado;
+	public String getCedula() {
+		return cedula;
 	}
 
-	public void setEmpleado(Empleado empleado) {
-		this.empleado = empleado;
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
 
-	
-	
+	public LocalDateTime getFecha() {
+		return fecha;
+	}
 
-	
+	public void setFecha(LocalDateTime feacha) {
+		this.fecha = feacha;
+	}
+
+	public Pasaporte getPasaporte() {
+		return pasaporte;
+	}
+
+	public void setPasaporte(Pasaporte pasaporte) {
+		this.pasaporte = pasaporte;
+	}
 	
 
 }
