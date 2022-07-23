@@ -56,9 +56,9 @@ public class ProyectoU2EcApplication implements CommandLineRunner {
 		habi2.setTipo("Matrimonial");
 		
 		habi2.setHotel(hote);
-		this.iHabitacionService.insertar(habi1);
-		this.iHabitacionService.insertar(habi2);
-		
+		//this.iHabitacionService.insertar(habi1);
+		//this.iHabitacionService.insertar(habi2);
+	
 	}
 
 }

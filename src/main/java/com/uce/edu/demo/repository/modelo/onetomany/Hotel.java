@@ -2,6 +2,7 @@ package com.uce.edu.demo.repository.modelo.onetomany;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class Hotel {
 	@Column(name="hote_direccion")
 	private String direccion;
 	
-	@OneToMany(mappedBy ="hotel" )
+	@OneToMany(mappedBy ="hotel" ,cascade = CascadeType.ALL)
 	private List<Habitacion> habitaciones;
 
 	

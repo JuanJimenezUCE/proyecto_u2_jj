@@ -14,6 +14,8 @@ public class HabitacionServiceImpl implements IHabitacionService{
 	@Override
 	public void insertar(Habitacion habitacion) {
 		// TODO Auto-generated method stub
+		
+		
 		this.iHabitacionRepository.insertar(habitacion);
 	}
 

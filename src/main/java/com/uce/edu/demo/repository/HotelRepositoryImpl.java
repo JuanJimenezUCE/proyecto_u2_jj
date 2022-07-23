@@ -15,6 +15,8 @@ public class HotelRepositoryImpl implements IHotelRepository{
 	@Override
 	public void insertar(Hotel hotel) {
 		// TODO Auto-generated method stub
+	
+		
 		this.entityManager.persist(hotel);
 	}
 
