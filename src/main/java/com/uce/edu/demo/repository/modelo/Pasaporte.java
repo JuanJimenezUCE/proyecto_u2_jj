@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.uce.edu.demo.repository.modelo.onetoone.Ciudadano;
+
 @Entity
 @Table(name="pasaporte")
 public class Pasaporte {

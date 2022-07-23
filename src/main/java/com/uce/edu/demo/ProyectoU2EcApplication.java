@@ -1,7 +1,5 @@
 package com.uce.edu.demo;
 
-import java.time.LocalDateTime;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +7,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.repository.modelo.Ciudadano;
-import com.uce.edu.demo.repository.modelo.Pasaporte;
-import com.uce.edu.demo.service.ICiudadanoService;
+import com.uce.edu.demo.repository.modelo.onetomany.Habitacion;
+import com.uce.edu.demo.repository.modelo.onetomany.Hotel;
+import com.uce.edu.demo.service.IHabitacionService;
+import com.uce.edu.demo.service.IHotelService;
 
 @SpringBootApplication
 public class ProyectoU2EcApplication implements CommandLineRunner {
@@ -19,9 +18,10 @@ public class ProyectoU2EcApplication implements CommandLineRunner {
 	private static final Logger LOG = LoggerFactory.getLogger(ProyectoU2EcApplication.class);
 
 	@Autowired
-	private ICiudadanoService iCiudadanoService;
+	private IHotelService iHotelService;
 
-
+	@Autowired
+	private IHabitacionService iHabitacionService;
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2EcApplication.class, args);
 	}
@@ -29,35 +29,36 @@ public class ProyectoU2EcApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		Ciudadano ciud1= new Ciudadano();
-		ciud1.setApellido("Juan");
-		ciud1.setNombre("Jimenez");
-		ciud1.setFecha(LocalDateTime.now());
-		ciud1.setCedula("1723850");
+		
+		Hotel hotel2 = new Hotel();
+		hotel2.setNombre("Hilton Colon GUY");
+		
+		hotel2.setDireccion("Malecon");
+
+		//this.iHotelService.insertar(hotel2);
 		
 		
-		Pasaporte pas1 = new Pasaporte();
-		pas1.setNumero("1238");
-		pas1.setFechaEmision(LocalDateTime.now());
-		pas1.setFechaCaducidad(LocalDateTime.of(2022, 12, 8, 10, 30));
-		pas1.setCiudadano(ciud1);	
-		ciud1.setPasaporte(pas1);
-	    //Isertar
-		this.iCiudadanoService.insertar(ciud1);
+		//buscar por algun numero o declarar
+		Hotel hote = new Hotel();
+		hote.setId(1);
 		
+		Habitacion habi1 = new Habitacion();
+		habi1.setNumero("A1234");
+		habi1.setPiso("10");
+		habi1.setTipo("Familiar");
 		
-		//Buscar
-		this.iCiudadanoService.buscarPorId(5);
-		//Actualizar
-		Ciudadano ciud2= new Ciudadano();
-	    ciud2.setId(6);
-		ciud2.setApellido("Juan");
-		ciud2.setNombre("Jimenez");
-		ciud2.setFecha(LocalDateTime.now());
-		ciud2.setCedula("172385085");
-		this.iCiudadanoService.actualizar(ciud2);
-		//Eliminar
-		this.iCiudadanoService.eliminar(9);
+		habi1.setHotel(hote);
+	
+		
+		Habitacion habi2 = new Habitacion();
+		habi2.setNumero("A123456");
+		habi2.setPiso("1");
+		habi2.setTipo("Matrimonial");
+		
+		habi2.setHotel(hote);
+		this.iHabitacionService.insertar(habi1);
+		this.iHabitacionService.insertar(habi2);
+		
 	}
 
 }
