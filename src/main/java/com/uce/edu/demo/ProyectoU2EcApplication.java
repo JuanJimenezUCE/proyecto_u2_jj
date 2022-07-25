@@ -1,5 +1,7 @@
 package com.uce.edu.demo;
 
+import java.time.LocalDateTime;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,10 +9,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.repository.modelo.onetomany.Habitacion;
-import com.uce.edu.demo.repository.modelo.onetomany.Hotel;
-import com.uce.edu.demo.service.IHabitacionService;
-import com.uce.edu.demo.service.IHotelService;
+import com.uce.edu.demo.repository.modelo.onetomany.Cliente;
+import com.uce.edu.demo.repository.modelo.onetomany.Pedido;
+import com.uce.edu.demo.service.IClienteService;
+import com.uce.edu.demo.service.IPedidoService;
 
 @SpringBootApplication
 public class ProyectoU2EcApplication implements CommandLineRunner {
@@ -18,10 +20,11 @@ public class ProyectoU2EcApplication implements CommandLineRunner {
 	private static final Logger LOG = LoggerFactory.getLogger(ProyectoU2EcApplication.class);
 
 	@Autowired
-	private IHotelService iHotelService;
+	private IClienteService iClienteService;
 
 	@Autowired
-	private IHabitacionService iHabitacionService;
+	private IPedidoService iPedidoService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2EcApplication.class, args);
 	}
@@ -29,36 +32,34 @@ public class ProyectoU2EcApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		
-		Hotel hotel2 = new Hotel();
-		hotel2.setNombre("Hilton Colon GUY");
-		
-		hotel2.setDireccion("Malecon");
 
-		//this.iHotelService.insertar(hotel2);
-		
-		
-		//buscar por algun numero o declarar
-		Hotel hote = new Hotel();
-		hote.setId(1);
-		
-		Habitacion habi1 = new Habitacion();
-		habi1.setNumero("A1234");
-		habi1.setPiso("10");
-		habi1.setTipo("Familiar");
-		
-		habi1.setHotel(hote);
+		Cliente cliente1 = new Cliente();
+		cliente1.setNombre("Tito");
+		cliente1.setApellido("Hernandez");
+		this.iClienteService.insertar(cliente1);
+
+		Cliente cliente = new Cliente();
+		cliente.setId(1);
+
+		Pedido pedido1 = new Pedido();
+		pedido1.setNumero("12");
+		pedido1.setFecha(LocalDateTime.now());
+		pedido1.setCosto("3.50");
+		pedido1.setCliente(cliente);
+		// this.iPedidoService.insertar(pedido1);
+
+		// Buscar
+		this.iClienteService.buscarPorId(2);
+		// Actualizar
+		Cliente cliente2 = new Cliente();
+		cliente2.setId(1);
+		cliente2.setApellido("Ortiz");
+		cliente2.setNombre("Gillermo");
 	
-		
-		Habitacion habi2 = new Habitacion();
-		habi2.setNumero("A123456");
-		habi2.setPiso("1");
-		habi2.setTipo("Matrimonial");
-		
-		habi2.setHotel(hote);
-		//this.iHabitacionService.insertar(habi1);
-		//this.iHabitacionService.insertar(habi2);
-	
+		this.iClienteService.actualizar(cliente2);
+		// Eliminar
+		this.iClienteService.eliminar(5);
+
 	}
 
 }
