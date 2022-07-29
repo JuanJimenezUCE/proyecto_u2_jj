@@ -20,7 +20,4 @@ public class MatriculaRepositoryImpl implements IMatriculaRepository{
 		this.entityManager.persist(matricula);
 	}
 
-
-
-
 }

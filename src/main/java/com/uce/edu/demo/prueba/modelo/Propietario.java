@@ -1,13 +1,12 @@
 package com.uce.edu.demo.prueba.modelo;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,8 +15,7 @@ public class Propietario {
 	
 	@Id
 	@Column(name= "prop_cedula")
-	//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "name_generator")
-	//@SequenceGenerator(name = "name_generator",sequenceName = "prop_id_seq", allocationSize = 1)
+
 	private String cedula;
 	@Column(name= "prop_nombre")
 	private String nombre;
@@ -25,12 +23,17 @@ public class Propietario {
 	private String apellido;
 	@Column(name= "prop_fecha")
 	private LocalDateTime fecha;
+	
+	@OneToMany(mappedBy ="propietario")
+	private List<Matricula> matriculas;
+	
+	
+	
 	@Override
 	public String toString() {
-		return "Propietario [nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + ", fecha=" + fecha
-				+ "]";
+		return "Propietario [cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", fecha=" + fecha
+				+ ", matriculas=" + matriculas + "]";
 	}
-	
 	//SET Y GET
 	public String getNombre() {
 		return nombre;
@@ -55,6 +58,12 @@ public class Propietario {
 	}
 	public void setFecha(LocalDateTime fecha) {
 		this.fecha = fecha;
+	}
+	public List<Matricula> getMatriculas() {
+		return matriculas;
+	}
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
 	}
 	
 	
